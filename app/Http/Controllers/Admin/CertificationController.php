@@ -19,14 +19,16 @@ class CertificationController extends Controller
         return view('admin.certifications.create', ['title' => 'Certification']);
     }
 
-    public function fetchAdmins(Request $request, CertificationServices $certificationServices)
-    {
-        $certifications = $certificationServices->fetchAdmins($request);
-        return $certifications;
-    }
     public function storeCertificate(Request $request, CertificationServices $certificationServices)
     {
         $certifications = $certificationServices->storeCertificate($request);
+        return $certifications;
+    }
+
+
+    public function fetchCertification(Request $request, CertificationServices $certificationServices)
+    {
+        $certifications = $certificationServices->fetchCertification($request);
         return $certifications;
     }
 }

@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\CertificationController;
+use App\Http\Controllers\Front\CheckStudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +18,13 @@ use App\Http\Controllers\Admin\CertificationController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('front.index');
 });
-//
-//Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index']);
-//Route::get('/pdfGenerate', [\App\Http\Controllers\HomeController::class, 'pdfGenerate']);
+Route::get('/pdf', [\App\Http\Controllers\HomeController::class, 'pdf'])->name('pdf');
+Route::post('/checkQrCode', [CheckStudentController::class, 'checkQrCode'])->name('checkQrCode');
+Route::get('/student_details/{id}', [CheckStudentController::class, 'afterQrCode'])->name('afterQrCode');
+Route::post('/checkImageDetail', [CheckStudentController::class, 'checkImageDetail'])->name('checkImageDetail');
+
 
 Route::get('/adminLogin', function () {
     if (Auth::check()) {
@@ -33,11 +37,25 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
     Route::post('/adminLogout', [AuthController::class, 'logout'])->name('adminLogout');
 
+    Route::group(['prefix' => 'students'], function () {
+        Route::get('/', [StudentController::class, 'listStudents'])->name('listStudents');
+        Route::get('/create', [StudentController::class, 'submitStudent'])->name('submitStudent');
+        Route::post('/store', [StudentController::class, 'storeStudent'])->name('storeStudent');
+        Route::get('/fetch_students', [StudentController::class, 'fetchStudents'])->name('fetchStudents');
+    });
+
     Route::group(['prefix' => 'certifications'], function () {
         Route::get('/', [CertificationController::class, 'listCertificates'])->name('listCertificates');
         Route::get('/create', [CertificationController::class, 'submitCertificate'])->name('submitCertificate');
         Route::post('/store', [CertificationController::class, 'storeCertificate'])->name('storeCertificate');
         Route::get('/fetch_certifications', [CertificationController::class, 'fetchCertification'])->name('fetchCertification');
+    });
+
+    Route::group(['prefix' => 'transcripts'], function () {
+        Route::get('/', [CertificationController::class, 'listTranscripts'])->name('listTranscripts');
+        Route::get('/create', [CertificationController::class, 'submitTranscript'])->name('submitTranscript');
+        Route::post('/store', [CertificationController::class, 'storeTranscript'])->name('storeTranscript');
+        Route::get('/fetch_transcripts', [CertificationController::class, 'fetchTranscripts'])->name('fetchTranscripts');
     });
 });
 

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade as PDF;
 use Imagick;
+use \ConvertApi\ConvertApi;
+
 
 class CertificationServices
 {
@@ -21,7 +23,7 @@ class CertificationServices
         return $certifications;
     }
 
-    public function fetchAdmins($request)
+    public function fetchCertification($request)
     {
         if ($request->ajax()) {
             $certifications = Certification::orderBy('id', 'DESC');
@@ -85,7 +87,7 @@ class CertificationServices
                 'total_marks' => $request->total_marks,
                 'obtain_marks' => $request->obtain_marks,
                 'result_notification_no' => $request->result_notification_no,
-                'marks_percentage' => ((int)$request->obtain_marks / (int)$request->total_marks) * 100,
+                'marks_percentage' => round(((int)$request->obtain_marks / (int)$request->total_marks) * 100),
                 'cgpq' => $request->cgpq,
                 'header_date' => Carbon::now()->format('d F y'),
                 'footer_date' => Carbon::now()->format('d/m/Y'),
@@ -99,13 +101,17 @@ class CertificationServices
             $certificate->update([
                 'pdf_path' => 'pdf/' . $certificate->id . '.pdf',
             ]);
-//            $imgExt = new Imagick();
-//            $imgExt->readImage($path . '/' . $fileName);
-//            $imgExt->writeImages($certificate->id . '.png', true);
-            $pdfToImagePath = public_path('pdf_images');
-            $imgExt = new \Spatie\PdfToImage\Pdf($path . '/' . $fileName);
-            $imgExt->saveImage($pdfToImagePath);
-            dd($imgExt);
+            $pathPDF = $path . '/' . $fileName;
+            $pathImageSave = public_path('pdf_images');
+            ConvertApi::setApiSecret('lePkA1ojdD5mSKRd');
+            $result = ConvertApi::convert('jpg', [
+                'File' => $pathPDF,
+            ], 'pdf'
+            );
+            $result->saveFiles($pathImageSave);
+            $certificate->update([
+                'pdf_path' => 'pdf_images/'. $certificate->id . '.jpg',
+            ]);
             return redirect()->route('listCertificates')->with('success', 'Certificate Created Successfully.');
         } else {
             DB::rollback();

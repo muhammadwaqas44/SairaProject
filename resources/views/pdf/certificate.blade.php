@@ -16,7 +16,7 @@
     }
 
     .top-right {
-        width: 43%;
+        width: 48%;
         float: left;
         text-align: right;
     }
@@ -35,10 +35,11 @@
     }
 
     .logo img {
-        margin-left: 40%;
+        margin-left: 45%;
         margin-right: auto;
         display: block;
-        width: 150px;
+        width: 100px;
+
     }
 
     .headings {
@@ -48,7 +49,6 @@
 
     .headings h4 {
         text-transform: uppercase;
-
     }
 
     input {
@@ -102,29 +102,25 @@
             <span>{{$header_date}}</span>
         </div>
     </div>
-
-
+    <div style="clear: both;"></div>
     <div class="logoHeader">
         <div class="logo">
             <img src="{{url('/').'/public/assets/MNSUAM-Logo.png'}}">
         </div>
-
-        <div class="headings clearfix" >
-            <h4>Muhammad Nawaz Shareef</h4>
-            <h3>University of Agriculture, Multan</h3>
-        </div>
     </div>
 </div>
-<br>
+<br><br><br><br><br>
 <div class="headings">
-    <h5><b>Provisonal Certificate<b></h5>
+    <h4>Muhammad Nawaz Shareef</h4>
+    <h4>University of Agriculture, Multan</h4>
+    <h4>Provisonal Certificate</h4>
 </div>
 <div class="pageBody">
     <br>
     <br>
     <div>
         <label>Candidate that:</label>
-        <input type="text" name="name" value="{{$candidate_name}}">
+        <input type="text" name="name" style="width: 83%;" value="{{$candidate_name}}">
     </div>
 
     <br>
@@ -136,7 +132,7 @@
     <br>
     <div>
         <label>Passed the:</label>
-        <input type="text" name="degree" style="width: 88%;" value="{{$class_name}}">
+        <input type="text" name="degree" style="width: 86%;" value="{{$class_name}}">
     </div>
 
     <br>
@@ -162,7 +158,7 @@
         <label>
             Securing CGPA :
         </label>
-        <input type="text" name="cgpa" style="width: 84%;" value="{{$cgpq}}/4.00">
+        <input type="text" name="cgpa" style="width: 80%;" value="{{$cgpq}}/4.00">
     </div>
 
 
@@ -172,16 +168,12 @@
         <br><br>
         <h4 style="margin-right: 200px">Controller of Examination <br>
             MNS University of Agriculture<br>Multan</h4>
-        <img src="{{$qr_code}}" style="width: 200px;margin-left: 50px">
+        <img src="{{$qr_code}}" style="width: 150px;margin-left: 80px">
 
 
     </div>
 
 </div>
-
-
-<br>
-<br>
 <br>
 <div class="footer">
     <div>

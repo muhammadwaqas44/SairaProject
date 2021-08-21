@@ -1,5 +1,5 @@
-if ($("#certifications_listing").length > 0) {
-    $("#certifications_listing").DataTable({
+if ($("#students_listing").length > 0) {
+    $("#students_listing").DataTable({
         "columnDefs": [{
             "orderable": false,
             "targets": [7]
@@ -9,7 +9,7 @@ if ($("#certifications_listing").length > 0) {
     });
 };
 
-$(document).on('click', '#custom_certifications_listing .pagination a', function() {
+$(document).on('click', '#custom_students_listing .pagination a', function() {
     event.preventDefault();
     var page = checkParam('page', $(this).attr('href'));
     var keyword = checkParam('keyword', $(this).attr('href'));

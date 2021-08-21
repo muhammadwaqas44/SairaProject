@@ -11,11 +11,11 @@ class HomeController extends Controller
         return view('pdf.certificate');
     }
 
-    public function pdfGenerate(){
+    public function pdf(){
         ini_set('max_execution_time', 300); //300 seconds = 5 minutes
         $data =['hello'];
-        $pdf = PDF::loadView('pdf.certificate', $data);
+        $pdf = PDF::loadView('pdf.transcript', $data);
         $pdf->setPaper('A4', 'portrait');
-        return $pdf->download('certificate.pdf');
+        return $pdf->download('transcript.pdf');
     }
 }

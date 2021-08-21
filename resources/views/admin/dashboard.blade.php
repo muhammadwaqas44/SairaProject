@@ -28,9 +28,9 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h4>{{ $certificateCount }} </h4>
+                            <h4>{{ $studentCount }} </h4>
 
-                            <p>Total Certificate</p>
+                            <p>Total Students</p>
                         </div>
                         <div class="icon">
                             <i class="fab fa-product-hunt"></i>
@@ -39,6 +39,42 @@
 {{--                                class="fas fa-arrow-circle-right"></i></a>--}}
                     </div>
                 </div>
+
+
+                <div class="col-lg-4 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h4>{{ $certificateCount }} </h4>
+
+                            <p>Total Certificates</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+{{--                        <a href="{{ route('listUsers') }}" class="small-box-footer">More info <i--}}
+{{--                                class="fas fa-arrow-circle-right"></i></a>--}}
+                    </div>
+                </div>
+                <!-- ./col -->
+
+                <!-- ./col -->
+                <div class="col-lg-4 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h4>{{ $transcriptCount }} </h4>
+
+                            <p>Total Transcripts</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+{{--                        <a href="{{ route('listBookings') }}" class="small-box-footer">More info <i--}}
+{{--                                class="fas fa-arrow-circle-right"></i></a>--}}
+                    </div>
+                </div>
+                <!-- ./col -->
 
 
             </div>
