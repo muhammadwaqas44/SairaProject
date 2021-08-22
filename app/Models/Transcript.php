@@ -10,4 +10,21 @@ class Transcript extends Model
 {
     use Uuids;
     use HasFactory;
-    protected $guarded = [''];}
+    protected $guarded = [''];
+    protected $appends = ['pdf_image'];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function getPdfImageAttribute()
+    {
+        if ($this->pdf_image_path) {
+            $file_name = $this->pdf_image_path;
+            return checkImage('public/' . $file_name);
+        }
+        return null;
+    }
+
+}

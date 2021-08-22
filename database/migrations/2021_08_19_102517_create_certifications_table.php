@@ -18,7 +18,7 @@ class CreateCertificationsTable extends Migration
             $table->string('certification_no')->nullable();
             $table->string('total_marks')->nullable();
             $table->string('obtain_marks')->nullable();
-            $table->string('cgpq')->nullable();
+            $table->string('cgpa')->nullable();
             $table->string('pdf_path',500)->nullable();
             $table->string('pdf_image_path',500)->nullable();
             $table->string('student_id')->nullable();

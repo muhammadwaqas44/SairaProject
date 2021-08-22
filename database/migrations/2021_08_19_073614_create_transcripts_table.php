@@ -15,10 +15,9 @@ class CreateTranscriptsTable extends Migration
     {
         Schema::create('transcripts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('certification_no')->nullable();
             $table->string('total_marks')->nullable();
             $table->string('obtain_marks')->nullable();
-            $table->string('cgpq')->nullable();
+            $table->string('cgpa')->nullable();
             $table->enum('status',['Completed','UnCompleted']);
             $table->string('pdf_path',500)->nullable();
             $table->string('pdf_image_path',500)->nullable();

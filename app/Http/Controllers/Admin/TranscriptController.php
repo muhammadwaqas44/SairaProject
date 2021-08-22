@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
+use App\Models\Transcript;
 use App\Services\TranscriptServices;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,9 @@ class TranscriptController extends Controller
 
     public function submitTranscript()
     {
-        return view('admin.certifications.create', ['title' => 'Certification']);
+        $students = Student::all();
+
+        return view('admin.transcripts.create', ['title' => 'Transcript','students'=>$students]);
     }
 
     public function fetchTranscripts(Request $request,  TranscriptServices $transcriptServices)
@@ -29,4 +33,14 @@ class TranscriptController extends Controller
         $transcripts = $transcriptServices->storeTranscript($request);
         return $transcripts;
     }
+    public function checkPdf($id){
+        $transcript = Transcript::where('id', $id)->firstOrFail();
+        if ($transcript->pdf_path) {
+            $file = public_path() .'/'. $transcript->pdf_path;
+            return response()->download($file);
+        } else {
+            return 'File Does not Exist';
+        }
+    }
+
 }

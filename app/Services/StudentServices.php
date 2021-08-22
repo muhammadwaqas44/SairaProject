@@ -55,8 +55,8 @@ class StudentServices
             'guardian_name' => $request->guardian_name,
             'class_name' => $request->class_name,
             'department_name' => $request->department_name,
-            'started_year' => $request->started_year,
-            'ended_year' => $request->ended_year,
+            'started_date' => $request->started_year,
+            'ended_date' => $request->ended_year,
             'phone' => $request->phone,
             'address' => $request->address,
             'profile_image' => addFile($request->profile_image, 'students/images/'),
@@ -73,8 +73,6 @@ class StudentServices
             $bcrptyId = bcrypt($student->id);
             $student->update([
                 'bcrypt_id' => $bcrptyId,
-                'registration_no' => 'RN/'.$student->student_unique_no,
-                'result_notification_no' => 'RNN/'.$student->student_unique_no,
             ]);
             $qrCode = QrCode::size(500)
                 ->format('png')
@@ -82,11 +80,15 @@ class StudentServices
             $student->update([
                 'qr_code_path' => 'qr_images/' . $student->id . '.png',
             ]);
+            $studentFinal = Student::find($student->id);
 
-            return redirect()->route('listStudents')->with('success', 'Certificate Created Successfully.');
+            $student->registration_no = 'RN/' . $studentFinal->student_unique_no;
+            $student->result_notification_no = 'RNN/' . $studentFinal->student_unique_no;
+            $student->save();
+            return redirect()->route('listStudents')->with('success', 'Student Created Successfully.');
         } else {
             DB::rollback();
-            return redirect()->back->with('error', 'Certificate Not Added.');
+            return redirect()->back->with('error', 'Student Not Added.');
         }
 
     }

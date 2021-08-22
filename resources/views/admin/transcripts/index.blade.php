@@ -12,8 +12,8 @@
                         <h1>{{ $title }}</h1>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <a class="btn btn-info btn-flat btn-md" href="{{ route('submitCertificate') }}">Add New
-                            Certification </a>
+                        <a class="btn btn-info btn-flat btn-md" href="{{ route('submitTranscript') }}">Add New
+                            Transcript </a>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -23,48 +23,45 @@
             <div class="card">
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <div id="custom_certifications_listing">
-                        <table id="certifications_listing"
+                    <div id="custom_transcripts_listing">
+                        <table id="transcripts_listing"
                                class="table table-bordered table-striped display responsive nowrap" cellspacing="0"
                                width="100%">
                             @php
                                 $count = 1;
                             @endphp
-                        <thead>
-                        <tr>
-                            <th style="width: 10px">Sr. No.</th>
-                            <th>Registration No</th>
-                            <th>Certification No</th>
-                            <th>Full Name</th>
-                            <th>Guardian Name</th>
-                            <th>Class</th>
-                            <th>Session</th>
-                            <th>Certificate</th>
-                            {{--                            <th style="width:120px;">Action</th>--}}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @php
-                            $count = ($certifications->currentPage()-1) *10;
-                        @endphp
-                        @foreach($certifications as $certification)
-                            <tr id="certificate_{{$certification->id}}">
-                                <td>{{$count+1 }}</td>
-                                <td>{{ $certification->registration_no }}</td>
-                                <td>{{ $certification->certification_no }}</td>
-                                <td>{{ $certification->candidate_name }}</td>
-                                <td>{{ $certification->guardian_name }}</td>
-                                <td>{{ $certification->class_name }}</td>
-                                <td>{{ $certification->started_year }}-{{ $certification->ended_year }}</td>
-                                <td>{{ $certification->pdf_path }}</td>
+                            <thead>
+                            <tr>
+                                <th style="width: 10px">Sr. No.</th>
+                                <th>Registration No</th>
+                                <th>Full Name</th>
+                                <th>Guardian Name</th>
+                                <th>Class</th>
+                                <th>Session</th>
+                                <th>Transcript</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             @php
-                                $count++;
+                                $count = ($transcripts->currentPage()-1) *10;
                             @endphp
-                        @endforeach
-                        </tbody>
+                            @foreach($transcripts as $transcript)
+                                <tr id="certificate_{{$certification->id}}">
+                                    <td>{{$count+1 }}</td>
+                                    <td>{{ $transcript->student->registration_no }}</td>
+                                    <td>{{ $transcript->student->candidate_name }}</td>
+                                    <td>{{ $transcript->student->guardian_name }}</td>
+                                    <td>{{ $transcript->student->class_name }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($transcript->student->started_date)->format('Y') }}-{{ \Carbon\Carbon::parse($transcript->student->ended_date)->format('Y') }}</td>
+                                    <td><a href="{{route('checkPdfResult',$transcript->id)}}"><img src="{{$transcript->pdf_image}}" style="width:100px"></a></td>
+                                </tr>
+                                @php
+                                    $count++;
+                                @endphp
+                            @endforeach
+                            </tbody>
                         </table>
-                        {{$certifications->links()}}
+                        {{$transcripts->links()}}
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -79,7 +76,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{asset('public/js/certification.js?v=1')}}"></script>
+    <script src="{{asset('public/js/transcripts.js?v=1')}}"></script>
     <script>
         var success = "{{ session('success') }}"
         if (success.length) {

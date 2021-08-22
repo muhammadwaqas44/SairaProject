@@ -21,7 +21,7 @@
                     <!-- general form elements -->
                     <div class="card card-info col-md-12 px-0">
                         <div class="card-header">
-                            <h3 class="card-title">Add Certification</h3>
+                            <h3 class="card-title">Add Transcript</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -33,107 +33,29 @@
                             @endphp
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="registration_no">Registration No <span
+                                    <div class="form-group col-md-12">
+                                        <label for="registration_no">Student <span
                                                 class="required-star">*</span></label>
-                                        <input type="text"
-                                               class="form-control @if ($errors->has('registration_no')) is-invalid @endif"
-                                               name="registration_no" id="registration_no"
-                                               placeholder="Enter Registration No" value="{{ old('registration_no') }}"
-                                               required>
-                                        @error('registration_no')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('registration_no') }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-md-6">
-                                        <label for="certification_no">Certification No <span
-                                                class="required-star">*</span></label>
-                                        <input type="text"
-                                               class="form-control @if ($errors->has('certification_no')) is-invalid @endif"
-                                               name="certification_no" id="certification_no"
-                                               placeholder="Enter Certificate No" value="{{ old('certification_no') }}"
-                                               required>
-                                        @error('certification_no')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('certification_no') }}</strong>
-                                    </span>
+                                        <select name="student_id" id="student_id"
+                                                class="form-control @if ($errors->has('student_id')) is-invalid @endif"
+                                                required>
+                                            <option value="" disabled selected>Select Student</option>
+                                            @foreach ($students as $student)
+                                                <option value="{{ $student->id }}"
+                                                    {{(old('student_id') == $student->id)? 'selected' : ''}}>
+                                                    {{ $student->candidate_name }}-{{ $student->class_name }}
+                                                    -{{ $student->department_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('student_id')
+                                        <div class=""><strong>{{ $message }}</strong></div>
                                         @enderror
                                     </div>
 
                                 </div>
 
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label>Candidate Name <span class="required-star">*</span></label>
-                                        <input type="text" id="candidate_name" name="candidate_name"
-                                               class="form-control @error('candidate_name') is-invalid @enderror"
-                                               placeholder="Enter Candidate Name" required>
-                                        @if ($errors->has('candidate_name'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('candidate_name') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group col-md-6">
-                                        <label>Guardian Name <span class="required-star">*</span></label>
-                                        <input type="text" id="guardian_name"
-                                               class="form-control @if ($errors->has('guardian_name')) is-invalid @endif"
-                                               name="guardian_name"
-                                               placeholder="Enter Email Address" value="{{ old('guardian_name') }}"
-                                               required>
-
-                                        @if ($errors->has('guardian_name'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('guardian_name') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
 
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label>Class <span class="required-star">*</span></label>
-                                        <input type="text" id="class_name"
-                                               class="form-control @if ($errors->has('class_name')) is-invalid @endif"
-                                               name="class_name" placeholder="Enter Class" required>
-                                        @if ($errors->has('class_name'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('class_name') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-
-
-                                    <div class="form-group col-md-6">
-                                        <label>Started Year <span class="required-star">*</span></label>
-                                        <input id="started_year" type="number"
-                                               class="form-control @if ($errors->has('started_year')) is-invalid @endif"
-                                               placeholder="Enter Started Year" name="started_year" required>
-                                        @if ($errors->has('started_year'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('started_year') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label>Ended year <span class="required-star">*</span></label>
-                                        <input type="number" id="ended_year"
-                                               class="form-control @if ($errors->has('ended_year')) is-invalid @endif"
-                                               name="ended_year" placeholder="Enter Ended year " required>
-                                        @if ($errors->has('ended_year'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('ended_year') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-
 
                                     <div class="form-group col-md-6">
                                         <label>Total Marks <span class="required-star">*</span></label>
@@ -146,9 +68,6 @@
                                     </span>
                                         @endif
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>Obtain Marks <span class="required-star">*</span></label>
                                         <input type="number" id="obtain_marks"
@@ -160,32 +79,44 @@
                                     </span>
                                         @endif
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label>CGPA <span class="required-star">*</span></label>
-                                        <input id="cgpq" type="number" step="0.01"
-                                               class="form-control @if ($errors->has('cgpq')) is-invalid @endif"
-                                               placeholder="Enter CGPS" name="cgpq" required>
-                                        @if ($errors->has('cgpq'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('cgpq') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label>Result Notification No <span class="required-star">*</span></label>
-                                        <input type="text" id="result_notification_no"
-                                               class="form-control @if ($errors->has('result_notification_no')) is-invalid @endif"
-                                               name="result_notification_no" placeholder="Enter Result Notification No " required>
-                                        @if ($errors->has('result_notification_no'))
+                                        <label>CGPA <span class="required-star">*</span></label>
+                                        <input id="cgpa" type="number" step="0.01"
+                                               class="form-control @if ($errors->has('cgpa')) is-invalid @endif"
+                                               placeholder="Enter CGPA" name="cgpa" required>
+                                        @if ($errors->has('cgpa'))
                                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('result_notification_no') }}</strong>
+                                        <strong>{{ $errors->first('cgpa') }}</strong>
                                     </span>
                                         @endif
                                     </div>
                                 </div>
+                                <div class="append-div-attr mb-2">
+                                    <div class="row">
+{{--                                        <div class="form-group col-md-5">--}}
+{{--                                            <label>Attributes <span class="required-star">*</span></label>--}}
 
+{{--                                            <input type="text" name="attribute[]" id="attribute"--}}
+{{--                                                   class="form-control {{ $errors->has('attribute') ? ' is-invalid' : '' }}"--}}
+{{--                                                   title="Select attribute" value="" required>--}}
+{{--                                            @if($errors->has('attribute'))--}}
+{{--                                                <span class="invalid-feedback" role="alert">--}}
+{{--                                        {{ $errors->first('attribute') }}--}}
+{{--                                    </span>--}}
+{{--                                            @endif--}}
+{{--                                        </div>--}}
+
+                                        <div align="left" class="mt-2 clearfixss">
+                                            <button type="button"
+                                                    class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 add_field_button mt-3">
+                                                + Add
+                                                Subject
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-info btn-flat">Add</button>
@@ -202,16 +133,34 @@
 @endsection
 @section('scripts')
     <script src="{{asset('public/js/certification.js?v=1')}}"></script>
-    <script>
-        // Vanilla Javascript
-        var input = document.querySelector("#contact_no");
-        window.intlTelInput(input, ({
-            // options here
-        }));
 
-        // jQuery
-        $("#contact_no").intlTelInput({
-            // options here
+    <script>
+        var wrapper_pe = $(".append-div-attr"); //Fields wrapper
+        var new_input_pe = $(".total-chq-c-pe").html();
+        var add_button_p = $(".add_field_button");
+        var HtmlEmle = '<div class="row">\n' +
+            ' <div class="form-group col-md-5">\n' +
+            ' <label>Attributes <span class="required-star">*</span></label>\n' +
+            ' <input type="text" name="attribute[]" id="attribute" class="form-control {{ $errors->has('attribute') ? ' is-invalid' : '' }}"\n' +
+            ' title="Select attribute" value="" required>\n' +
+            ' @if($errors->has('attribute'))\n' +
+            ' <span class="invalid-feedback" role="alert">\n' +
+            ' {{ $errors->first('attribute') }}\n' +
+            ' </span>\n' +
+            ' @endif\n' +
+            ' </div>\n' +
+            ' <div align="left" class="mt-3 clearfixss">\n' +
+            ' <button type="button"\n' +
+            ' class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 remove_fie mt-3">+ Remove\n' +
+            ' </button>\n' +
+            ' </div>\n' +
+            ' </div>';
+        $(add_button_p).click(function (e) { //on add input button click
+            $(wrapper_pe).append(HtmlEmle); //add input box
+        });
+        $(wrapper_pe).on("click", ".remove_fie", function (e) { //user click on remove text
+            e.preventDefault();
+            $(this).parent('div').parent('div').remove();
         });
     </script>
 @endsection

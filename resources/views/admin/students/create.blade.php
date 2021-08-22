@@ -129,8 +129,8 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Date Of Birth <span class="required-star">*</span></label>
-                                        <input type="text" id="date_of_birth"
-                                               class="form-control @if ($errors->has('date_of_birth')) is-invalid @endif"
+                                        <input type="date" id="date"
+                                               class="form-control date @if ($errors->has('date_of_birth')) is-invalid @endif"
                                                name="date_of_birth" placeholder="Enter Date Of Birth" required>
                                         @if ($errors->has('date_of_birth'))
                                             <span class="invalid-feedback" role="alert">
@@ -139,12 +139,60 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Campus Name <span class="required-star">*</span></label>
+                                        <input type="text" id="name_campus"
+                                               class="form-control @if ($errors->has('name_campus')) is-invalid @endif"
+                                               name="name_campus" placeholder="Enter Campus Name" required>
+                                        @if ($errors->has('name_campus'))
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name_campus') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Batch No <span class="required-star">*</span></label>
+                                        <input type="text" id="batch_no"
+                                               class="form-control @if ($errors->has('batch_no')) is-invalid @endif"
+                                               name="batch_no" placeholder="Enter Batch No" required>
+                                        @if ($errors->has('batch_no'))
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('batch_no') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Profile Image <span class="required-star">*</span></label>
+                                        <input type="file" id="profile_image"
+                                               class="form-control @if ($errors->has('profile_image')) is-invalid @endif"
+                                               name="profile_image" placeholder="Enter Profile" required>
+                                        @if ($errors->has('profile_image'))
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('profile_image') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>CNIC <span class="required-star">*</span></label>
+                                        <input type="text" id="cnic"
+                                               class="form-control @if ($errors->has('cnic')) is-invalid @endif"
+                                               name="cnic" placeholder="Enter CNIC" required>
+                                        @if ($errors->has('cnic'))
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('cnic') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>Started Year <span class="required-star">*</span></label>
-                                        <input id="started_year" type="number"
-                                               class="form-control @if ($errors->has('started_year')) is-invalid @endif"
+                                        <input id="date" type="date"
+                                               class="form-control date @if ($errors->has('started_year')) is-invalid @endif"
                                                placeholder="Enter Started Year" name="started_year" required>
                                         @if ($errors->has('started_year'))
                                             <span class="invalid-feedback" role="alert">
@@ -154,8 +202,8 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Ended year <span class="required-star">*</span></label>
-                                        <input type="number" id="ended_year"
-                                               class="form-control @if ($errors->has('ended_year')) is-invalid @endif"
+                                        <input type="date" id="date"
+                                               class="form-control date @if ($errors->has('ended_year')) is-invalid @endif"
                                                name="ended_year" placeholder="Enter Ended year " required>
                                         @if ($errors->has('ended_year'))
                                             <span class="invalid-feedback" role="alert">
@@ -165,44 +213,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label>Obtain Marks <span class="required-star">*</span></label>
-                                        <input type="number" id="obtain_marks"
-                                               class="form-control @if ($errors->has('obtain_marks')) is-invalid @endif"
-                                               name="obtain_marks" placeholder="Enter Obtain Marks " required>
-                                        @if ($errors->has('obtain_marks'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('obtain_marks') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>CGPA <span class="required-star">*</span></label>
-                                        <input id="cgpq" type="number" step="0.01"
-                                               class="form-control @if ($errors->has('cgpq')) is-invalid @endif"
-                                               placeholder="Enter CGPS" name="cgpq" required>
-                                        @if ($errors->has('cgpq'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('cgpq') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label>Result Notification No <span class="required-star">*</span></label>
-                                        <input type="text" id="result_notification_no"
-                                               class="form-control @if ($errors->has('result_notification_no')) is-invalid @endif"
-                                               name="result_notification_no" placeholder="Enter Result Notification No "
-                                               required>
-                                        @if ($errors->has('result_notification_no'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('result_notification_no') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
 
                                 <div class="row">
                                     <div class="col-md-6">

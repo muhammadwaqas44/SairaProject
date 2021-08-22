@@ -1,5 +1,5 @@
-if ($("#students_listing").length > 0) {
-    $("#students_listing").DataTable({
+if ($("#transcripts_listing").length > 0) {
+    $("#transcripts_listing").DataTable({
         "columnDefs": [{
             "orderable": false,
             "targets": [7]
@@ -9,7 +9,7 @@ if ($("#students_listing").length > 0) {
     });
 };
 
-$(document).on('click', '#custom_students_listing .pagination a', function() {
+$(document).on('click', '#custom_transcripts_listing .pagination a', function() {
     event.preventDefault();
     var page = checkParam('page', $(this).attr('href'));
     var keyword = checkParam('keyword', $(this).attr('href'));
@@ -41,12 +41,6 @@ function loadNext(page, keyword) {
         }
     });
 }
-
-$('.date').daterangepicker({
-    singleDatePicker: true,
-    autoUpdateInput: false,
-    maxDate: new Date()
-});
 
 function search_data(url = '') {
     $.ajax({

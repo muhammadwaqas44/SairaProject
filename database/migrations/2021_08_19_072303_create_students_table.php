@@ -29,7 +29,7 @@ class CreateStudentsTable extends Migration
             $table->date('ended_date')->nullable();
             $table->string('name_campus')->nullable();
             $table->string('batch_no')->nullable();
-            $table->string('date_of_birth')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('profile_image')->nullable();
             $table->string('cnic')->nullable();
             $table->string('qr_code_path', 500)->nullable();

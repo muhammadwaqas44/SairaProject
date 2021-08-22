@@ -40,7 +40,6 @@
                             <th>Class</th>
                             <th>Session</th>
                             <th>Certificate</th>
-                            {{--                            <th style="width:120px;">Action</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -50,13 +49,13 @@
                         @foreach($certifications as $certification)
                             <tr id="certificate_{{$certification->id}}">
                                 <td>{{$count+1 }}</td>
-                                <td>{{ $certification->registration_no }}</td>
+                                <td>{{ $certification->student->registration_no }}</td>
                                 <td>{{ $certification->certification_no }}</td>
-                                <td>{{ $certification->candidate_name }}</td>
-                                <td>{{ $certification->guardian_name }}</td>
-                                <td>{{ $certification->class_name }}</td>
-                                <td>{{ $certification->started_year }}-{{ $certification->ended_year }}</td>
-                                <td>{{ $certification->pdf_path }}</td>
+                                <td>{{ $certification->student->candidate_name }}</td>
+                                <td>{{ $certification->student->guardian_name }}</td>
+                                <td>{{ $certification->student->class_name }}</td>
+                                <td>{{ \Carbon\Carbon::parse($certification->student->started_date)->format('Y') }}-{{ \Carbon\Carbon::parse($certification->student->ended_date)->format('Y') }}</td>
+                                <td><a href="{{route('checkPdf',$certification->id)}}"><img src="{{$certification->pdf_image}}" style="width:100px"></a></td>
                             </tr>
                             @php
                                 $count++;

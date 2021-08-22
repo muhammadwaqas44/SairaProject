@@ -23,8 +23,6 @@ class CreateTranscriptSubjectsTable extends Migration
             $table->string('grade')->nullable();
             $table->string('quantity_points')->nullable();
             $table->text('remarks')->nullable();
-            $table->string('pdf_path',500)->nullable();
-            $table->string('pdf_image_path',500)->nullable();
             $table->string('transcript_id')->nullable();
             $table->foreign('transcript_id')->references('id')->on('transcripts')->onDelete ('cascade');
             $table->string('student_id')->nullable();

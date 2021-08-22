@@ -131,6 +131,12 @@
             @csrf
             <input name="id" type="hidden" value="a3a284c7-18ed-4b1f-abb3-26b954114d4e">
             <div class="form-group">
+                <label for="file">Type</label>
+                <select class="form-control" name="type" required>
+                    <option value="certificate">Certificate</option>
+                    <option value="transcript">Transcript</option>
+                </select></div>
+            <div class="form-group">
                 <label for="file">Image File</label>
                 <input type="file" class="form-control" id="file" name="check_image">
             </div>
@@ -170,7 +176,7 @@
             type: 'POST',
             url: "{{route('checkImageDetail')}}",
             data: formData,
-            cache : false,
+            cache: false,
             processData: false,
             contentType: false,
             success: function (response, status) {

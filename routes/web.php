@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\CertificationController;
+use App\Http\Controllers\Admin\TranscriptController;
 use App\Http\Controllers\Front\CheckStudentController;
 /*
 |--------------------------------------------------------------------------
@@ -49,13 +50,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('/create', [CertificationController::class, 'submitCertificate'])->name('submitCertificate');
         Route::post('/store', [CertificationController::class, 'storeCertificate'])->name('storeCertificate');
         Route::get('/fetch_certifications', [CertificationController::class, 'fetchCertification'])->name('fetchCertification');
+        Route::get('/check_pdf/{id}', [CertificationController::class, 'checkPdf'])->name('checkPdf');
     });
 
     Route::group(['prefix' => 'transcripts'], function () {
-        Route::get('/', [CertificationController::class, 'listTranscripts'])->name('listTranscripts');
-        Route::get('/create', [CertificationController::class, 'submitTranscript'])->name('submitTranscript');
-        Route::post('/store', [CertificationController::class, 'storeTranscript'])->name('storeTranscript');
-        Route::get('/fetch_transcripts', [CertificationController::class, 'fetchTranscripts'])->name('fetchTranscripts');
+        Route::get('/', [TranscriptController::class, 'listTranscripts'])->name('listTranscripts');
+        Route::get('/create', [TranscriptController::class, 'submitTranscript'])->name('submitTranscript');
+        Route::post('/store', [TranscriptController::class, 'storeTranscript'])->name('storeTranscript');
+        Route::get('/fetch_transcripts', [TranscriptController::class, 'fetchTranscripts'])->name('fetchTranscripts');
+        Route::get('/check_pdf_result/{id}', [TranscriptController::class, 'checkPdf'])->name('checkPdfResult');
+
     });
 });
 

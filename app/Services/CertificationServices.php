@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Certification;
+use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -36,73 +37,51 @@ class CertificationServices
     {
         ini_set('max_execution_time', 300);
         $request->validate([
-            'registration_no' => 'required|string',
-            'certification_no' => 'required|string',
-            'candidate_name' => 'required|string|max:150',
-            'guardian_name' => 'required|string|max:150',
-            'class_name' => 'required|string',
-            'started_year' => 'required|string',
-            'result_notification_no' => 'required|string',
-            'ended_year' => 'required|string',
+            'student_id' => 'required',
             'total_marks' => 'required|numeric',
             'obtain_marks' => 'required|numeric',
-            'cgpq' => 'required|numeric',
+            'cgpa' => 'required|numeric',
         ]);
+        $student = Student::find($request->student_id);
         $data = [
-            'registration_no' => $request->registration_no,
-            'certification_no' => $request->certification_no,
-            'candidate_name' => $request->candidate_name,
-            'guardian_name' => $request->guardian_name,
-            'class_name' => $request->class_name,
-            'started_year' => $request->started_year,
-            'ended_year' => $request->ended_year,
+            'certification_no' => 'CN/'.$student->student_unique_no,
             'total_marks' => $request->total_marks,
             'obtain_marks' => $request->obtain_marks,
-            'result_notification_no' => $request->result_notification_no,
-            'cgpq' => $request->cgpq,
+            'cgpa' => $request->cgpa,
+            'student_id' => $student->id,
             'admin_id' => Auth::user()->id,
         ];
         DB::beginTransaction();
         $certificate = Certification::create($data);
         if ($certificate) {
             DB::commit();
-            $bcrptyId = bcrypt($certificate->id);
-            $certificate->update([
-                'bcrypt_id' => $bcrptyId,
-            ]);
-            $qrCode = QrCode::size(500)
-                ->format('png')
-                ->generate($certificate->id, public_path('qr_images/' . $certificate->id . '.png'));
-            $certificate->update([
-                'qr_code_path' => 'qr_images/' . $certificate->id . '.png',
-            ]);
             $dataPdf = [
-                'registration_no' => $request->registration_no,
-                'certification_no' => $request->certification_no,
-                'candidate_name' => $request->candidate_name,
-                'guardian_name' => $request->guardian_name,
-                'class_name' => $request->class_name,
-                'started_year' => $request->started_year,
-                'ended_year' => $request->ended_year,
+                'registration_no' => $student->registration_no,
+                'certification_no' => 'CN/'.$student->student_unique_no,
+                'candidate_name' => $student->candidate_name,
+                'guardian_name' => $student->guardian_name,
+                'class_name' => $student->class_name,
+                'started_year' => Carbon::parse($student->started_date)->format('Y'),
+                'ended_year' => Carbon::parse($student->ended_date)->format('Y'),
                 'total_marks' => $request->total_marks,
                 'obtain_marks' => $request->obtain_marks,
-                'result_notification_no' => $request->result_notification_no,
+                'result_notification_no' => $student->result_notification_no,
                 'marks_percentage' => round(((int)$request->obtain_marks / (int)$request->total_marks) * 100),
-                'cgpq' => $request->cgpq,
+                'cgpq' => $request->cgpa,
                 'header_date' => Carbon::now()->format('d F y'),
                 'footer_date' => Carbon::now()->format('d/m/Y'),
-                'qr_code' => url('/') . '/public/qr_images/' . $certificate->id . '.png',
+                'qr_code' => url('/') . '/public/qr_images/' . $student->id . '.png',
             ];
             $pdf = PDF::loadView('pdf.certificate', $dataPdf);
             $pdf->setPaper('A4', 'portrait');
-            $path = public_path('pdf/');
+            $path = public_path('pdf/certificates/');
             $fileName = $certificate->id . '.pdf';
             $pdf->save($path . '/' . $fileName);
             $certificate->update([
-                'pdf_path' => 'pdf/' . $certificate->id . '.pdf',
+                'pdf_path' => 'pdf/certificates/' . $certificate->id . '.pdf',
             ]);
             $pathPDF = $path . '/' . $fileName;
-            $pathImageSave = public_path('pdf_images');
+            $pathImageSave = public_path('pdf_images/certificates/');
             ConvertApi::setApiSecret('lePkA1ojdD5mSKRd');
             $result = ConvertApi::convert('jpg', [
                 'File' => $pathPDF,
@@ -110,7 +89,7 @@ class CertificationServices
             );
             $result->saveFiles($pathImageSave);
             $certificate->update([
-                'pdf_path' => 'pdf_images/'. $certificate->id . '.jpg',
+                'pdf_image_path' => 'pdf_images/certificates/'. $certificate->id . '.jpg',
             ]);
             return redirect()->route('listCertificates')->with('success', 'Certificate Created Successfully.');
         } else {
