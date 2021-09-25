@@ -21,8 +21,8 @@ class CheckStudentServices
     public function checkImageDetail($request)
     {
         ini_set('max_execution_time', 300);
-        $data1 = 'public/pdf_images/3db2e2a9-adf9-457b-afdd-78db3b877544.jpg';
-        $data2 = 'public/pdf_images/20beeccf-fd50-4267-907d-fd8304c8d6cf.jpg';
+        $data1 = 'public/pdf_images/certificates/a2e080a0-7e06-49ad-9197-b9cf890a682e.jpg';
+        $data2 = 'public/pdf_images/a2e080a0-7e06-49ad-9197-b9cf890a682e.jpg';
 
         $data3 = 'public/check_images/' . $request->id . '-original.jpg';
         $data4 = 'public/check_images/' . $request->id . '-modified.jpg';
@@ -44,7 +44,7 @@ class CheckStudentServices
             'thresh' => 'public/check_images/' . $request->id . '-thresh.jpg',
         ];
         $view_append = view('front.append_result', compact('afterArray'))->render();
-        if ($process->getOutput() != null) {
+        if ($process->getOutput()) {
             return response()->json(['result' => 'success', 'message' => 'Comparing Images Completed .', 'view_append' => $view_append]);
         } else {
             return response()->json(['result' => 'error', 'message' => 'Request Is not Submit']);

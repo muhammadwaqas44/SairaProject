@@ -47,10 +47,11 @@ class StudentServices
             'date_of_birth' => 'required',
             'name_campus' => 'required',
             'batch_no' => 'required',
+            'registration_no' => 'required',
         ]);
         $data = [
             'email' => $request->email,
-            'password' => Hash::make('1223456'),
+            'password' => Hash::make('123456'),
             'candidate_name' => $request->candidate_name,
             'guardian_name' => $request->guardian_name,
             'class_name' => $request->class_name,
@@ -64,6 +65,7 @@ class StudentServices
             'date_of_birth' => $request->date_of_birth,
             'name_campus' => $request->name_campus,
             'batch_no' => $request->batch_no,
+            'registration_no' => $request->registration_no,
             'admin_id' => Auth::user()->id,
         ];
         DB::beginTransaction();
@@ -82,7 +84,6 @@ class StudentServices
             ]);
             $studentFinal = Student::find($student->id);
 
-            $student->registration_no = 'RN/' . $studentFinal->student_unique_no;
             $student->result_notification_no = 'RNN/' . $studentFinal->student_unique_no;
             $student->save();
             return redirect()->route('listStudents')->with('success', 'Student Created Successfully.');

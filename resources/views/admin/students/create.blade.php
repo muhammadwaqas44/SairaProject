@@ -31,6 +31,19 @@
 
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>Registration No <span class="required-star">*</span></label>
+                                        <input id="registration_no" type="text"
+                                               class="form-control @if ($errors->has('registration_no')) is-invalid @endif"
+                                               placeholder="Enter Registration No" name="registration_no" required>
+                                        @if ($errors->has('registration_no'))
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('registration_no') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>Candidate Name <span class="required-star">*</span></label>
                                         <input type="text" id="candidate_name" name="candidate_name"
@@ -44,11 +57,11 @@
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label>Guardian Name <span class="required-star">*</span></label>
+                                        <label>Father's Name <span class="required-star">*</span></label>
                                         <input type="text" id="guardian_name"
                                                class="form-control @if ($errors->has('guardian_name')) is-invalid @endif"
                                                name="guardian_name"
-                                               placeholder="Enter Email Address" value="{{ old('guardian_name') }}"
+                                               placeholder="Enter Father's Name" value="{{ old('guardian_name') }}"
                                                required>
 
                                         @if ($errors->has('guardian_name'))
@@ -128,7 +141,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>Date Of Birth <span class="required-star">*</span></label>
+                                        <label>Date of Birth <span class="required-star">*</span></label>
                                         <input type="date" id="date"
                                                class="form-control date @if ($errors->has('date_of_birth')) is-invalid @endif"
                                                name="date_of_birth" placeholder="Enter Date Of Birth" required>
@@ -141,10 +154,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label>Campus Name <span class="required-star">*</span></label>
+                                        <label>University Name <span class="required-star">*</span></label>
                                         <input type="text" id="name_campus"
                                                class="form-control @if ($errors->has('name_campus')) is-invalid @endif"
-                                               name="name_campus" placeholder="Enter Campus Name" required>
+                                               name="name_campus" placeholder="Enter University Name" required>
                                         @if ($errors->has('name_campus'))
                                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name_campus') }}</strong>
@@ -190,7 +203,7 @@
 
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label>Started Year <span class="required-star">*</span></label>
+                                        <label>Start Year <span class="required-star">*</span></label>
                                         <input id="date" type="date"
                                                class="form-control date @if ($errors->has('started_year')) is-invalid @endif"
                                                placeholder="Enter Started Year" name="started_year" required>
@@ -201,7 +214,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>Ended year <span class="required-star">*</span></label>
+                                        <label>End Year <span class="required-star">*</span></label>
                                         <input type="date" id="date"
                                                class="form-control date @if ($errors->has('ended_year')) is-invalid @endif"
                                                name="ended_year" placeholder="Enter Ended year " required>
@@ -212,6 +225,7 @@
                                         @endif
                                     </div>
                                 </div>
+
 
 
                                 <div class="row">

@@ -101,16 +101,16 @@
 
 <main>
     <div class="right">
-        <div class="loop">name:<span>Ahmer Bilal</span></div>
-        <div class="loop">father name:<span>ABdul hameed</span></div>
+        <div class="loop">name:<span>Muhammad Waqas</span></div>
+        <div class="loop">father name:<span>Muhammad Ashfaq Anjum</span></div>
         <div class="loop">cnic<span>:32563-5184415-7</span></div>
-        <div class="loop">batch no:<span>258</span></div>
+        <div class="loop">batch no:<span>12</span></div>
         <div class="loop">date of birth:<span>24-nov-1992</span></div>
     </div>
     <div class="left">
         <div class="right_main">
-            <div class="loop">name:<span>Ahmer Bilal</span></div>
-            <div class="loop">father name:<span>ABdul hameed khan</span></div>
+            <div class="loop">name:<span>Muhammad Waqas</span></div>
+            <div class="loop">father name:<span>Muhammad Ashfaq Anjum</span></div>
             <div class="loop">cnic<span>:32563-5184415-7</span></div>
             <div class="loop">batch no:<span>258</span></div>
             <div class="loop">date of birth:<span>24-nov-1992</span></div>

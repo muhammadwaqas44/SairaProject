@@ -40,7 +40,7 @@
 @yield('content')
 
 <footer class="main-footer">
-    <strong>Copyright &copy; 2020 <a href="#">Admin</a>.</strong>
+    <strong>Copyright &copy; 2021 <a href="#">Admin</a>.</strong>
     All rights reserved.
 </footer>
 
