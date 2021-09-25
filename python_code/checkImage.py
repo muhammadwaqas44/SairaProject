@@ -3,14 +3,12 @@ import argparse
 import imutils
 import cv2
 import sys
-
 imageA = cv2.imread(sys.argv[1])
 imageB = cv2.imread(sys.argv[2])
 OriginalImage = sys.argv[3]
 ModifiedImage = sys.argv[4]
 DiffImage = sys.argv[5]
 ThreshImage = sys.argv[6]
-
 grayA = cv2.cvtColor(imageA, cv2.COLOR_BGR2GRAY)
 grayB = cv2.cvtColor(imageB, cv2.COLOR_BGR2GRAY)
 (score, diff) = compare_ssim(grayA, grayB, full=True)

@@ -40,6 +40,7 @@
                             <th>Phone</th>
                             <th>Class</th>
                             <th>Session</th>
+                            <th>QR</th>
                             {{--                            <th style="width:120px;">Action</th>--}}
                         </tr>
                         </thead>
@@ -57,6 +58,7 @@
                                 <td>{{ $student->phone }}</td>
                                 <td>{{ $student->class_name }}</td>
                                 <td>{{ \Carbon\Carbon::parse($student->started_date)->format('Y') }}-{{ \Carbon\Carbon::parse($student->ended_date)->format('Y') }}</td>
+                                <td><img src="{{$student->qr_image}}" style="width:100px"></td>
                             </tr>
                             @php
                                 $count++;

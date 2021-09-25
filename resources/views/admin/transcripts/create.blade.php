@@ -7,7 +7,7 @@
             <div class="container-fluid px-0">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Certifications</h1>
+                        <h1>Transcripts</h1>
                     </div>
                     <div class="col-sm-6 text-right">
                         <a class="btn btn-info btn-flat btn-md" href="{{ route('listTranscripts') }}">Back </a>
@@ -94,21 +94,11 @@
                                     </div>
                                 </div>
                                 <div class="append-div-attr mb-2">
+
                                     <div class="row">
-{{--                                        <div class="form-group col-md-5">--}}
-{{--                                            <label>Attributes <span class="required-star">*</span></label>--}}
 
-{{--                                            <input type="text" name="attribute[]" id="attribute"--}}
-{{--                                                   class="form-control {{ $errors->has('attribute') ? ' is-invalid' : '' }}"--}}
-{{--                                                   title="Select attribute" value="" required>--}}
-{{--                                            @if($errors->has('attribute'))--}}
-{{--                                                <span class="invalid-feedback" role="alert">--}}
-{{--                                        {{ $errors->first('attribute') }}--}}
-{{--                                    </span>--}}
-{{--                                            @endif--}}
-{{--                                        </div>--}}
 
-                                        <div align="left" class="mt-2 clearfixss">
+                                        <div class="mt-2 clearfixss">
                                             <button type="button"
                                                     class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 add_field_button mt-3">
                                                 + Add
@@ -134,33 +124,111 @@
 @section('scripts')
     <script src="{{asset('public/js/certification.js?v=1')}}"></script>
 
-    <script>
-        var wrapper_pe = $(".append-div-attr"); //Fields wrapper
-        var new_input_pe = $(".total-chq-c-pe").html();
-        var add_button_p = $(".add_field_button");
-        var HtmlEmle = '<div class="row">\n' +
-            ' <div class="form-group col-md-5">\n' +
-            ' <label>Attributes <span class="required-star">*</span></label>\n' +
-            ' <input type="text" name="attribute[]" id="attribute" class="form-control {{ $errors->has('attribute') ? ' is-invalid' : '' }}"\n' +
-            ' title="Select attribute" value="" required>\n' +
-            ' @if($errors->has('attribute'))\n' +
-            ' <span class="invalid-feedback" role="alert">\n' +
-            ' {{ $errors->first('attribute') }}\n' +
-            ' </span>\n' +
-            ' @endif\n' +
-            ' </div>\n' +
-            ' <div align="left" class="mt-3 clearfixss">\n' +
-            ' <button type="button"\n' +
-            ' class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 remove_fie mt-3">+ Remove\n' +
-            ' </button>\n' +
-            ' </div>\n' +
-            ' </div>';
-        $(add_button_p).click(function (e) { //on add input button click
-            $(wrapper_pe).append(HtmlEmle); //add input box
-        });
-        $(wrapper_pe).on("click", ".remove_fie", function (e) { //user click on remove text
-            e.preventDefault();
-            $(this).parent('div').parent('div').remove();
-        });
-    </script>
 @endsection
+<script>
+    var wrapper_pe = $(".append-div-attr"); //Fields wrapper
+    var new_input_pe = $(".total-chq-c-pe").html();
+    var add_button_p = $(".add_field_button");
+    var HtmlEmle = '<div >\n' +
+        '<div class="row">\n' +
+        '<div class="form-group col-md-6">\n' +
+        '<label>Course Id <span class="required-star">*</span></label>\n' +
+        '<input id="course_id" type="text"\n' +
+        'class="form-control @if ($errors->has('course_id')) is-invalid @endif"\n' +
+        'placeholder="Enter Course Id" name="course_id" required>\n' +
+        '@if ($errors->has('course_id'))\n' +
+        '<span class="invalid-feedback" role="alert">\n' +
+        '<strong>{{ $errors->first('course_id') }}</strong>\n' +
+        '</span>\n' +
+        '@endif\n' +
+        '</div>\n' +
+        '<div class="form-group col-md-6">\n' +
+        '<label>Course Title <span class="required-star">*</span></label>\n' +
+        '<input type="text" id="course_title"\n' +
+        'class="form-control @if ($errors->has('course_title')) is-invalid @endif"\n' +
+        'name="course_title" placeholder="Enter Course Title "\n' +
+        'required>\n' +
+        '@if ($errors->has('course_title'))\n' +
+        '<span class="invalid-feedback" role="alert">\n' +
+        '<strong>{{ $errors->first('course_title') }}</strong>\n' +
+        '</span>\n' +
+        '@endif\n' +
+        '</div>\n' +
+        '</div>\n' +
+        '<div class="row">\n' +
+        '<div class="form-group col-md-6">\n' +
+        '<label>Credit Hour <span class="required-star">*</span></label>\n' +
+        '<input id="credit_hour" type="text"\n' +
+        'class="form-control @if ($errors->has('credit_hour')) is-invalid @endif"\n' +
+        'placeholder="Enter Credit Hour" name="credit_hour" required>\n' +
+        '@if ($errors->has('credit_hour'))\n' +
+        '<span class="invalid-feedback" role="alert">\n' +
+        '<strong>{{ $errors->first('credit_hour') }}</strong>\n' +
+        '</span>\n' +
+        '@endif\n' +
+        '</div>\n' +
+        '<div class="form-group col-md-6">\n' +
+        '<label>Max Marks <span class="required-star">*</span></label>\n' +
+        '<input type="text" id="max_marks"\n' +
+        'class="form-control @if ($errors->has('max_marks')) is-invalid @endif"\n' +
+        'name="max_marks" placeholder="Enter Max Marks "\n' +
+        'required>\n' +
+        '@if ($errors->has('max_marks'))\n' +
+        '<span class="invalid-feedback" role="alert">\n' +
+        '<strong>{{ $errors->first('max_marks') }}</strong>\n' +
+        '</span>\n' +
+        '@endif\n' +
+        '</div>\n' +
+        '</div>\n' +
+        '<div class="row">\n' +
+        '<div class="form-group col-md-6">\n' +
+        '<label>Obtained Marks <span class="required-star">*</span></label>\n' +
+        '<input id="obtained_marks" type="text"\n' +
+        'class="form-control @if ($errors->has('obtained_marks')) is-invalid @endif"\n' +
+        'placeholder="Enter Obtained Marks" name="obtained_marks" required>\n' +
+        '@if ($errors->has('obtained_marks'))\n' +
+        '<span class="invalid-feedback" role="alert">\n' +
+        '<strong>{{ $errors->first('obtained_marks') }}</strong>\n' +
+        '</span>\n' +
+        '@endif\n' +
+        '</div>\n' +
+        '<div class="form-group col-md-6">\n' +
+        '<label>Grade <span class="required-star">*</span></label>\n' +
+        '<input type="text" id="grade"\n' +
+        'class="form-control @if ($errors->has('grade')) is-invalid @endif"\n' +
+        'name="grade" placeholder="Enter Grade "\n' +
+        'required>\n' +
+        '@if ($errors->has('grade'))\n' +
+        '<span class="invalid-feedback" role="alert">\n' +
+        '<strong>{{ $errors->first('grade') }}</strong>\n' +
+        '</span>\n' +
+        '@endif\n' +
+        '</div>\n' +
+        '</div>\n' +
+        '<div class="row">\n' +
+        '<div class="form-group col-md-6">\n' +
+        '<label>Quantity Points <span class="required-star">*</span></label>\n' +
+        '<input id="quantity_points" type="text"\n' +
+        'class="form-control @if ($errors->has('quantity_points')) is-invalid @endif"\n' +
+        'placeholder="Enter Quantity Points" name="quantity_points" required>\n' +
+        '@if ($errors->has('quantity_points'))\n' +
+        '<span class="invalid-feedback" role="alert">\n' +
+        '<strong>{{ $errors->first('quantity_points') }}</strong>\n' +
+        '</span>\n' +
+        '@endif\n' +
+        '</div>\n' +
+        '</div>\n' +
+    ' <div align="left" class="mt-3 clearfixss">\n' +
+    ' <button type="button"\n' +
+    ' class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 remove_fie mt-3">+ Remove\n' +
+    ' </button>\n' +
+    ' </div>\n' +
+    ' </div>';
+    $(add_button_p).click(function (e) { //on add input button click
+        $(wrapper_pe).append(HtmlEmle); //add input box
+    });
+    $(wrapper_pe).on("click", ".remove_fie", function (e) { //user click on remove text
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove();
+    });
+</script>
