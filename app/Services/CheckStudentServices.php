@@ -13,10 +13,10 @@ class CheckStudentServices
 {
     public function checkQrCode($request)
     {
-        $checkData = $request->qrcode_value;
+        $checkData = decrypt($request->qrcode_value);
         $student = Student::find($checkData);
-        if ($checkData == 'a3a284c7-18ed-4b1f-abb3-26b954114d4e') {
-//        if ($student) {
+//        if ($checkData == 'a3a284c7-18ed-4b1f-abb3-26b954114d4e') {
+        if ($student) {
             return response()->json(['result' => 'success', 'message' => 'Document is not forged.']);
         } else {
             return response()->json(['result' => 'error', 'message' => 'Document is forged.']);
@@ -26,19 +26,19 @@ class CheckStudentServices
     public function checkImageDetail($request)
     {
         ini_set('max_execution_time', 300);
+        $id = decrypt($request->id);
 
         if ($request->type == 'certificate'){
-            $record = Certification::where('student_id',$request->id)->first();
+            $record = Certification::where('student_id',$id)->first();
         }else{
-            $record = Transcript::where('student_id',$request->id)->first();
-
+            $record = Transcript::where('student_id',$id)->first();
         }
         if (!$record) {
             return response()->json(['result' => 'error', 'message' => 'Document is forged. No Record Found']);
         }
         $data1 = 'public/'. $record->pdf_image_path;
         $check_image = $request->check_image;
-        $imageName = time().'.'.$request->image->extension();
+        $imageName = time().'.'.$check_image->extension();
         $check_image->move(public_path('checks'), $imageName);
         $data2 = 'public/checks/'.$imageName;
 
