@@ -3,6 +3,9 @@
 
 namespace App\Services;
 
+use App\Models\Certification;
+use App\Models\Student;
+use App\Models\Transcript;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
@@ -11,7 +14,9 @@ class CheckStudentServices
     public function checkQrCode($request)
     {
         $checkData = $request->qrcode_value;
+        $student = Student::find($checkData);
         if ($checkData == 'a3a284c7-18ed-4b1f-abb3-26b954114d4e') {
+//        if ($student) {
             return response()->json(['result' => 'success', 'message' => 'Document is not forged.']);
         } else {
             return response()->json(['result' => 'error', 'message' => 'Document is forged.']);
@@ -21,8 +26,21 @@ class CheckStudentServices
     public function checkImageDetail($request)
     {
         ini_set('max_execution_time', 300);
-        $data1 = 'public/pdf_images/certificates/a2e080a0-7e06-49ad-9197-b9cf890a682e.jpg';
-        $data2 = 'public/pdf_images/a2e080a0-7e06-49ad-9197-b9cf890a682e.jpg';
+
+        if ($request->type == 'certificate'){
+            $record = Certification::where('student_id',$request->id)->first();
+        }else{
+            $record = Transcript::where('student_id',$request->id)->first();
+
+        }
+        if (!$record) {
+            return response()->json(['result' => 'error', 'message' => 'Document is forged. No Record Found']);
+        }
+        $data1 = 'public/'. $record->pdf_image_path;
+        $check_image = $request->check_image;
+        $imageName = time().'.'.$request->image->extension();
+        $check_image->move(public_path('checks'), $imageName);
+        $data2 = 'public/checks/'.$imageName;
 
         $data3 = 'public/check_images/' . $request->id . '-original.jpg';
         $data4 = 'public/check_images/' . $request->id . '-modified.jpg';
