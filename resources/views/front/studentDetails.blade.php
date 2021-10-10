@@ -101,19 +101,17 @@
 
 <main>
     <div class="right">
-        <div class="loop">name:<span>Muhammad Waqas</span></div>
-        <div class="loop">father name:<span>Muhammad Ashfaq Anjum</span></div>
-        <div class="loop">cnic<span>:32563-5184415-7</span></div>
-        <div class="loop">batch no:<span>12</span></div>
-        <div class="loop">date of birth:<span>24-nov-1992</span></div>
+        <div class="loop">Name:<span>{{$student->candidate_name}}</span></div>
+        <div class="loop">Father Name:<span>{{$student->guardian_name}}</span></div>
+        <div class="loop">CNIC<span>:{{$student->cnic}}</span></div>
+        <div class="loop">Batch No:<span>{{$student->batch_no}}</span></div>
+        <div class="loop">Dte of Birth:<span>{{$student->date_of_birth}}</span></div>
     </div>
     <div class="left">
         <div class="right_main">
-            <div class="loop">name:<span>Muhammad Waqas</span></div>
-            <div class="loop">father name:<span>Muhammad Ashfaq Anjum</span></div>
-            <div class="loop">cnic<span>:32563-5184415-7</span></div>
-            <div class="loop">batch no:<span>258</span></div>
-            <div class="loop">date of birth:<span>24-nov-1992</span></div>
+            <div class="loop">registration_no<span>:{{$student->registration_no}}</span></div>
+            <div class="loop">Class:<span>{{$student->department_name}}</span></div>
+            <div class="loop">Department:<span>{{$student->class_name}}</span></div>
         </div>
         <div class="img_lef">
             <img src="{{url('/').'/public/assets/ri_2.png'}}" alt="">
@@ -129,7 +127,7 @@
     <div>
         <form id="getResultImages" enctype="multipart/form-data">
             @csrf
-            <input name="id" type="hidden" value="a3a284c7-18ed-4b1f-abb3-26b954114d4e">
+            <input name="id" type="hidden" value="{{$student->id}}">
             <div class="form-group">
                 <label for="file">Type</label>
                 <select class="form-control" name="type" required>

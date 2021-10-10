@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade as PDF;
 use Imagick;
+use Spatie\PdfToImage\Pdf as Change;
 use \ConvertApi\ConvertApi;
 
 
@@ -76,20 +77,35 @@ class CertificationServices
             $pdf->setPaper('A4', 'portrait');
             $path = public_path('pdf/certificates/');
             $fileName = $certificate->id . '.pdf';
+            $fileNameImg = $certificate->id . '.png';
             $pdf->save($path . '/' . $fileName);
             $certificate->update([
                 'pdf_path' => 'pdf/certificates/' . $certificate->id . '.pdf',
             ]);
             $pathPDF = $path . '/' . $fileName;
             $pathImageSave = public_path('pdf_images/certificates/');
+            if( is_dir($pathImageSave) === false )
+            {
+                mkdir($pathImageSave);
+            }
+//            $pdf = new Spatie\PdfToImage\Pdf($pathPDF);
+//            $pdf = new Change($pathPDF);;
+//            $pdf->saveImage($pathImageSave);
+
+//            $imagick = new Imagick();
+//
+//            $imagick->readImage($pathPDF);
+//
+//            $imagick->writeImages($pathImageSave.'/'.$fileNameImg, true);
+
             ConvertApi::setApiSecret('lePkA1ojdD5mSKRd');
             $result = ConvertApi::convert('jpg', [
                 'File' => $pathPDF,
             ], 'pdf'
             );
-            $result->saveFiles($pathImageSave);
+            $result->saveFiles($pathImageSave.$fileNameImg);
             $certificate->update([
-                'pdf_image_path' => 'pdf_images/certificates/'. $certificate->id . '.jpg',
+                'pdf_image_path' => 'pdf_images/certificates/'. $certificate->id . '.png',
             ]);
             return redirect()->route('listCertificates')->with('success', 'Certificate Created Successfully.');
         } else {

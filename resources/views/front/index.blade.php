@@ -97,7 +97,6 @@
             _token: _token,
             'qrcode_value': qrcode_value,
         };
-        var url = "{{ url('student_details') }}"+'/'+ele;
         $.blockUI({
             css: {
                 border: 'none',
@@ -116,6 +115,7 @@
             success: function (response, status) {
                 if (response.result == 'success') {
                     $.unblockUI();
+                    var url = "{{ url('student_details') }}"+'/'+response.data.id;
                     Swal.fire(response.message)
                     setTimeout(function () {
                         window.location.href = url;

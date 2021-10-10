@@ -30,6 +30,7 @@ class TranscriptController extends Controller
     }
     public function storeTranscript(Request $request,  TranscriptServices $transcriptServices)
     {
+        dd($request->all());
         $transcripts = $transcriptServices->storeTranscript($request);
         return $transcripts;
     }

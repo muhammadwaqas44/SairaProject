@@ -25,6 +25,7 @@ Route::get('/pdf', [\App\Http\Controllers\HomeController::class, 'pdf'])->name('
 Route::post('/checkQrCode', [CheckStudentController::class, 'checkQrCode'])->name('checkQrCode');
 Route::get('/student_details/{id}', [CheckStudentController::class, 'afterQrCode'])->name('afterQrCode');
 Route::post('/checkImageDetail', [CheckStudentController::class, 'checkImageDetail'])->name('checkImageDetail');
+//Route::get('/pdftoimage', [CheckStudentController::class, 'pdftoimage']);
 
 
 Route::get('/adminLogin', function () {

@@ -13,11 +13,11 @@ class CheckStudentServices
 {
     public function checkQrCode($request)
     {
-        $checkData = decrypt($request->qrcode_value);
-        $student = Student::find($checkData);
+        $checkData = $request->qrcode_value;
+        $student = Student::where('bcrypt_id',$checkData)->first();
 //        if ($checkData == 'a3a284c7-18ed-4b1f-abb3-26b954114d4e') {
         if ($student) {
-            return response()->json(['result' => 'success', 'message' => 'Document is not forged.']);
+            return response()->json(['result' => 'success', 'message' => 'Document is not forged.','data'=>$student]);
         } else {
             return response()->json(['result' => 'error', 'message' => 'Document is forged.']);
         }
@@ -26,12 +26,12 @@ class CheckStudentServices
     public function checkImageDetail($request)
     {
         ini_set('max_execution_time', 300);
-        $id = decrypt($request->id);
-
+        $checkData = $request->id;
+        $student = Student::where('id',$checkData)->first();
         if ($request->type == 'certificate'){
-            $record = Certification::where('student_id',$id)->first();
+            $record = Certification::where('student_id',$student->id)->first();
         }else{
-            $record = Transcript::where('student_id',$id)->first();
+            $record = Transcript::where('student_id',$student->id)->first();
         }
         if (!$record) {
             return response()->json(['result' => 'error', 'message' => 'Document is forged. No Record Found']);
@@ -42,11 +42,11 @@ class CheckStudentServices
         $check_image->move(public_path('checks'), $imageName);
         $data2 = 'public/checks/'.$imageName;
 
-        $data3 = 'public/check_images/' . $request->id . '-original.jpg';
-        $data4 = 'public/check_images/' . $request->id . '-modified.jpg';
-        $data5 = 'public/check_images/' . $request->id . '-diff.jpg';
-        $data6 = 'public/check_images/' . $request->id . '-thresh.jpg';
-
+        $data3 = 'public/check_images/' . $request->id . '-original.png';
+        $data4 = 'public/check_images/' . $request->id . '-modified.png';
+        $data5 = 'public/check_images/' . $request->id . '-diff.png';
+        $data6 = 'public/check_images/' . $request->id . '-thresh.png';
+//dd($data1,$data2,$data3,$data4,$data5,$data6);
         $process = new Process(['python', 'python_code/checkImage.py', "{$data1}", "{$data2}", "{$data3}", "{$data4}", "{$data5}", "{$data6}"]);
         $process->setTimeout(3600);
         $process->run();
@@ -56,10 +56,10 @@ class CheckStudentServices
         }
 
         $afterArray = [
-            'original' => 'public/check_images/' . $request->id . '-original.jpg',
-            'modified' => 'public/check_images/' . $request->id . '-modified.jpg',
-            'diff' => 'public/check_images/' . $request->id . '-diff.jpg',
-            'thresh' => 'public/check_images/' . $request->id . '-thresh.jpg',
+            'original' => 'public/check_images/' . $request->id . '-original.png',
+            'modified' => 'public/check_images/' . $request->id . '-modified.png',
+            'diff' => 'public/check_images/' . $request->id . '-diff.png',
+            'thresh' => 'public/check_images/' . $request->id . '-thresh.png',
         ];
         $view_append = view('front.append_result', compact('afterArray'))->render();
         if ($process->getOutput()) {

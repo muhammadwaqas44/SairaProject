@@ -164,6 +164,26 @@
             <td>8.00</td>
             <td></td>
         </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
         </tbody>
         <tbody>
         <tr>
@@ -216,8 +236,171 @@
             <td>8.00</td>
             <td></td>
         </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
         </tbody>
-
+        <tbody>
+        <tr>
+            <td></td>
+            <td class="intero">1st smester (Winter 2015-16)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+            <td></td>
+            <td class="intero">1st smester (Winter 2015-16)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>cs-301</td>
+            <td>introduction of computer</td>
+            <td>3(2-1)</td>
+            <td>60</td>
+            <td>36</td>
+            <td>c</td>
+            <td>8.00</td>
+            <td></td>
+        </tr>
+        </tbody>
     </table>
 </div>
 
