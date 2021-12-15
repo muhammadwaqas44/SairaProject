@@ -46,7 +46,6 @@ class CheckStudentServices
         $data4 = 'public/check_images/' . $request->id . '-modified.png';
         $data5 = 'public/check_images/' . $request->id . '-diff.png';
         $data6 = 'public/check_images/' . $request->id . '-thresh.png';
-//dd($data1,$data2,$data3,$data4,$data5,$data6);
         $process = new Process(['python', 'python_code/checkImage.py', "{$data1}", "{$data2}", "{$data3}", "{$data4}", "{$data5}", "{$data6}"]);
         $process->setTimeout(3600);
         $process->run();
@@ -56,7 +55,7 @@ class CheckStudentServices
         }
 
         $afterArray = [
-            'original' => 'public/check_images/' . $request->id . '-original.png',
+            'original' => 'public/'. $record->pdf_image_path,
             'modified' => 'public/check_images/' . $request->id . '-modified.png',
             'diff' => 'public/check_images/' . $request->id . '-diff.png',
             'thresh' => 'public/check_images/' . $request->id . '-thresh.png',

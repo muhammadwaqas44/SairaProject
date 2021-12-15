@@ -28,7 +28,7 @@
 @section('content')
 <div class="hold-transition login-page">
     <div class="login-box">
-        <img src={{ asset('public/admin/dist/img/luxup-logo.png') }} alt="AdminLTE Logo" height="250px;" class="ml-5" width="250px;" style="opacity: .8">
+        <img src={{ asset('public/assets/MNSUAM-Logo.png') }} alt="AdminLTE Logo" height="250px;" class="ml-5" width="250px;" style="opacity: .8">
         <div class="login-logo">
             <a href="#">Admin</a>
         </div>
